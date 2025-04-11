@@ -4,64 +4,80 @@ import { AirQualityData, Location, WeatherData } from '../types';
 import AQIStatus from '../components/AQIStatus';
 import WeatherInfo from '../components/WeatherInfo';
 import HealthAdvisories from '../components/HealthAdvisories';
-import BostonMap from '../components/BostonMap';
+import MassachusettsMap from '../components/MassachusettsMap';
 import { Link } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
-  // Boston locations - expanded with more neighborhoods
-  const bostonLocations: Location[] = [
+  // Massachusetts locations featuring a mix of areas
+  const maLocations: Location[] = [
     {
       name: 'East Boston',
       latitude: 42.3702,
       longitude: -71.0309,
       timezone: 'America/New_York',
+      description: 'Focus area - Near Logan Airport with environmental justice concerns',
+      type: 'focus'
     },
     {
-      name: 'Downtown Boston',
-      latitude: 42.3601,
-      longitude: -71.0589,
+      name: 'Chelsea',
+      latitude: 42.3918,
+      longitude: -71.0328,
       timezone: 'America/New_York',
+      description: 'Industrial area with environmental justice concerns',
+      type: 'industrial'
     },
     {
-      name: 'Cambridge',
-      latitude: 42.3736,
-      longitude: -71.1097,
+      name: 'Lawrence',
+      latitude: 42.7070,
+      longitude: -71.1631,
       timezone: 'America/New_York',
+      description: 'Former industrial city with diverse population',
+      type: 'industrial'
     },
     {
-      name: 'Roxbury',
-      latitude: 42.3152,
-      longitude: -71.0914,
+      name: 'New Bedford',
+      latitude: 41.6362,
+      longitude: -70.9342,
       timezone: 'America/New_York',
+      description: 'Port city with industrial history',
+      type: 'industrial'
     },
     {
-      name: 'South Boston',
-      latitude: 42.3381,
-      longitude: -71.0477,
+      name: 'Springfield',
+      latitude: 42.1015,
+      longitude: -72.5898,
       timezone: 'America/New_York',
+      description: 'Urban center with industrial areas',
+      type: 'industrial'
     },
     {
-      name: 'Dorchester',
-      latitude: 42.3016,
-      longitude: -71.0676,
+      name: 'Weston',
+      latitude: 42.3668,
+      longitude: -71.3042,
       timezone: 'America/New_York',
+      description: 'Affluent suburban community',
+      type: 'wealthy'
     },
     {
-      name: 'Charlestown',
-      latitude: 42.3782,
-      longitude: -71.0602,
+      name: 'Wellesley',
+      latitude: 42.2968,
+      longitude: -71.2923,
       timezone: 'America/New_York',
+      description: 'Wealthy residential area',
+      type: 'wealthy'
     },
     {
-      name: 'Jamaica Plain',
-      latitude: 42.3097,
-      longitude: -71.1151,
+      name: 'Newton',
+      latitude: 42.3370,
+      longitude: -71.2092,
       timezone: 'America/New_York',
+      description: 'Affluent suburban community',
+      type: 'wealthy'
     },
   ];
 
   // State
-  const [selectedLocation, setSelectedLocation] = useState<Location>(bostonLocations[0]);
+  const [selectedLocation, setSelectedLocation] = useState<Location>(maLocations[0]);
   const [airQualityData, setAirQualityData] = useState<AirQualityData | null>(null);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -74,6 +90,8 @@ const Dashboard: React.FC = () => {
     const fetchData = async () => {
       setLoading(true);
       setError(null);
+      
+      console.log(`Fetching data for ${selectedLocation.name} at coordinates: ${selectedLocation.latitude}, ${selectedLocation.longitude}`);
       
       try {
         // Fetch air quality and weather data
@@ -156,8 +174,8 @@ const Dashboard: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold">Boston Air Quality Dashboard</h1>
-              <p className="mt-1">Last updated: {currentTime}</p>
+              <h1 className="text-3xl font-bold">Massachusetts Air Quality Dashboard</h1>
+              <p className="mt-1">Focusing on East Boston | Last updated: {currentTime}</p>
             </div>
             <div className="flex items-center space-x-4">
               <Link 
@@ -180,17 +198,22 @@ const Dashboard: React.FC = () => {
           <div className="bg-white rounded-lg shadow-md p-4">
             <h2 className="text-xl font-semibold mb-2">Selected Location: {selectedLocation.name}</h2>
             <p className="text-gray-600">
-              View air quality data for different neighborhoods in the Boston area.
-              Click on the map or use the location buttons to switch locations.
+              Our project focuses on air quality in East Boston, with comparisons to other Massachusetts areas that have 
+              different socioeconomic profiles. This helps highlight potential environmental justice concerns.
             </p>
+            {selectedLocation.description && (
+              <div className="mt-2 p-2 bg-blue-50 rounded-md">
+                <p className="text-sm text-gray-700">{selectedLocation.description}</p>
+              </div>
+            )}
           </div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column - Map */}
           <div>
-            <BostonMap 
-              locations={bostonLocations}
+            <MassachusettsMap 
+              locations={maLocations}
               selectedLocation={selectedLocation}
               onLocationChange={setSelectedLocation}
             />

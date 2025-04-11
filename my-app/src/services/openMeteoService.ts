@@ -18,8 +18,11 @@ export const fetchAirQualityData = async (location: Location): Promise<AirQualit
       hourly: ["pm10", "pm2_5", "us_aqi", "us_aqi_pm2_5", "us_aqi_pm10", "nitrogen_dioxide", "ozone", "sulphur_dioxide", "carbon_monoxide"],
       timezone: location.timezone,
       forecast_days: 3,
-      domains: "cams_global" // Using global domain for global coverage
+      domains: "cams_global", // Using global domain for global coverage
+      cache_bust: new Date().getTime() // Add cache-busting parameter
     };
+
+    console.log(`Making air quality API call for ${location.name} with params:`, JSON.stringify(params));
 
     const url = "https://air-quality-api.open-meteo.com/v1/air-quality";
     const responses = await fetchWeatherApi(url, params);
@@ -48,6 +51,13 @@ export const fetchAirQualityData = async (location: Location): Promise<AirQualit
       co: toNumberArray(hourly.variables(8)!.valuesArray()!)
     };
     
+    // Log a sample of the data to verify it's different
+    console.log(`Air quality data for ${location.name} - Sample AQI values:`, 
+      weatherData.usAqi.slice(0, 3), 
+      `PM2.5 sample:`, 
+      weatherData.pm25.slice(0, 3)
+    );
+    
     // Return formatted data
     return {
       time: weatherData.time,
@@ -74,8 +84,11 @@ export const fetchWeatherData = async (location: Location): Promise<WeatherData>
       longitude: location.longitude,
       hourly: ["temperature_2m", "windspeed_10m", "winddirection_10m", "precipitation"],
       timezone: location.timezone,
-      forecast_days: 3
+      forecast_days: 3,
+      cache_bust: new Date().getTime() // Add cache-busting parameter
     };
+
+    console.log(`Making weather API call for ${location.name} with params:`, JSON.stringify(params));
 
     const url = "https://api.open-meteo.com/v1/forecast";
     const responses = await fetchWeatherApi(url, params);
@@ -98,6 +111,13 @@ export const fetchWeatherData = async (location: Location): Promise<WeatherData>
       windDirection: toNumberArray(hourly.variables(2)!.valuesArray()!),
       precipitation: toNumberArray(hourly.variables(3)!.valuesArray()!)
     };
+    
+    // Log a sample of the data to verify it's different
+    console.log(`Weather data for ${location.name} - Sample temperature values:`, 
+      weatherData.temperature.slice(0, 3), 
+      `Wind speed sample:`, 
+      weatherData.windSpeed.slice(0, 3)
+    );
     
     // Return formatted data
     return {
