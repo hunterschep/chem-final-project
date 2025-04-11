@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { fetchAirQualityData, fetchWeatherData } from '../services/openMeteoService';
 import { AirQualityData, Location, WeatherData } from '../types';
 import AQIStatus from '../components/AQIStatus';
-import WeatherInfo from '../components/WeatherInfo';
 import HealthAdvisories from '../components/HealthAdvisories';
 import MassachusettsMap from '../components/MassachusettsMap';
+import ChemistryExplainer from '../components/ChemistryExplainer';
+import HistoricalContext from '../components/HistoricalContext';
 import { Link } from 'react-router-dom';
+
+// Define content view types
+type ContentView = 'map' | 'chemistry' | 'history';
 
 const Dashboard: React.FC = () => {
   // Massachusetts locations featuring a mix of areas
@@ -84,6 +88,7 @@ const Dashboard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState<string>('');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [activeView, setActiveView] = useState<ContentView>('map');
 
   // Fetch data when location changes
   useEffect(() => {
@@ -179,14 +184,6 @@ const Dashboard: React.FC = () => {
                 </span>
               </div>
             </div>
-            <div className="flex items-center">
-              <Link 
-                to="/abstract" 
-                className="bg-blue-700 hover:bg-blue-800 px-3 py-1.5 rounded text-sm font-medium transition"
-              >
-                Project Abstract
-              </Link>
-            </div>
           </div>
         </div>
       </header>
@@ -217,20 +214,54 @@ const Dashboard: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* Content View Selector */}
+        <div className="mb-6">
+          <div className="flex bg-white rounded-lg shadow-sm overflow-hidden">
+            <button
+              className={`flex-1 py-3 px-4 font-medium text-sm ${activeView === 'map' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`}
+              onClick={() => setActiveView('map')}
+            >
+              Air Quality Map
+            </button>
+            <button
+              className={`flex-1 py-3 px-4 font-medium text-sm ${activeView === 'chemistry' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`}
+              onClick={() => setActiveView('chemistry')}
+            >
+              Chemistry Explainer
+            </button>
+            <button
+              className={`flex-1 py-3 px-4 font-medium text-sm ${activeView === 'history' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`}
+              onClick={() => setActiveView('history')}
+            >
+              Historical Context
+            </button>
+          </div>
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          {/* Left Column - Map */}
+          {/* Left Column - Dynamic Content */}
           <div className="lg:col-span-3">
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-              <MassachusettsMap 
-                locations={maLocations}
-                selectedLocation={selectedLocation}
-                onLocationChange={setSelectedLocation}
-              />
-              <div className="p-3 bg-gray-50 border-t text-xs text-gray-500">
-                Compare air quality across different socioeconomic areas in Massachusetts
+            {activeView === 'map' && (
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <MassachusettsMap 
+                  locations={maLocations}
+                  selectedLocation={selectedLocation}
+                  onLocationChange={setSelectedLocation}
+                />
+                <div className="p-3 bg-gray-50 border-t text-xs text-gray-500">
+                  Compare air quality across different socioeconomic areas in Massachusetts
+                </div>
               </div>
-            </div>
+            )}
+            
+            {activeView === 'chemistry' && (
+              <ChemistryExplainer />
+            )}
+            
+            {activeView === 'history' && (
+              <HistoricalContext />
+            )}
           </div>
           
           {/* Right Column - Air Quality and Weather Info */}
@@ -249,13 +280,6 @@ const Dashboard: React.FC = () => {
               <HealthAdvisories aqi={currentAQI} />
             </div>
             
-            <div className="bg-white rounded-lg shadow-sm p-5">
-              <h2 className="text-lg font-bold mb-3 pb-2 border-b">Current Weather</h2>
-              <WeatherInfo 
-                weather={weatherData}
-                currentIndex={currentIndex}
-              />
-            </div>
           </div>
         </div>
       </main>

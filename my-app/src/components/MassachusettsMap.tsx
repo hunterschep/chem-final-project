@@ -1,11 +1,22 @@
-import React, { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import React, { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Location } from '../types';
 
 // Fix for default leaflet marker icons
 const defaultIcon = L.icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+// Custom pin icon for user-dropped pins
+const customPinIcon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
@@ -59,6 +70,19 @@ const MapCenter: React.FC<{ position: [number, number] }> = ({ position }) => {
   return null;
 };
 
+// Component to handle map clicks and add custom pins
+const MapClickHandler: React.FC<{
+  onMapClick: (lat: number, lng: number) => void
+}> = ({ onMapClick }) => {
+  const map = useMapEvents({
+    click: (e) => {
+      onMapClick(e.latlng.lat, e.latlng.lng);
+    }
+  });
+  
+  return null;
+};
+
 interface MassachusettsMapProps {
   locations: Location[];
   selectedLocation: Location;
@@ -70,6 +94,8 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
   selectedLocation, 
   onLocationChange
 }) => {
+  const [customPinLocation, setCustomPinLocation] = useState<Location | null>(null);
+  
   // Fix for Leaflet icon issues in webpack
   useEffect(() => {
     // Fix Leaflet icon for webpack
@@ -100,6 +126,22 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
     return 8;
   };
 
+  // Handle map click to create a custom location
+  const handleMapClick = (lat: number, lng: number) => {
+    // Get the address or city name using reverse geocoding (simplified for now)
+    const newCustomLocation: Location = {
+      name: `Custom Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`,
+      latitude: lat,
+      longitude: lng,
+      timezone: 'America/New_York',
+      description: 'Custom location selected by user',
+      type: 'focus'
+    };
+    
+    setCustomPinLocation(newCustomLocation);
+    onLocationChange(newCustomLocation);
+  };
+
   return (
     <div className="w-full h-[600px] relative">
       {/* Map Legend positioned absolutely over the map */}
@@ -125,6 +167,12 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
         </div>
       </div>
       
+      {/* Map instructions */}
+      <div className="absolute top-20 left-5 bg-white p-3 rounded-lg shadow-lg z-[1000] border border-gray-200">
+        <h3 className="font-bold text-sm mb-1 text-center">📍 Click anywhere on the map</h3>
+        <p className="text-xs text-gray-600">to get air quality data for that location</p>
+      </div>
+      
       <MapContainer
         key={`map-${selectedLocation.name}`}
         center={getInitialCenter()}
@@ -136,7 +184,10 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         
-        {/* Place markers for all locations */}
+        {/* Map click handler for custom pins */}
+        <MapClickHandler onMapClick={handleMapClick} />
+        
+        {/* Place markers for all predefined locations */}
         {locations.map((location, index) => (
           <Marker
             key={index}
@@ -162,6 +213,29 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
             </Popup>
           </Marker>
         ))}
+        
+        {/* Custom pin marker if exists */}
+        {customPinLocation && (
+          <Marker
+            position={[customPinLocation.latitude, customPinLocation.longitude]}
+            icon={defaultIcon}
+          >
+            <Popup>
+              <div className="p-2">
+                <h3 className="font-bold text-lg">{customPinLocation.name}</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Lat: {customPinLocation.latitude.toFixed(4)}, Lng: {customPinLocation.longitude.toFixed(4)}
+                </p>
+                <button
+                  onClick={() => onLocationChange(customPinLocation)}
+                  className="mt-2 text-sm text-blue-500 hover:underline"
+                >
+                  Update air quality data
+                </button>
+              </div>
+            </Popup>
+          </Marker>
+        )}
       </MapContainer>
     </div>
   );
