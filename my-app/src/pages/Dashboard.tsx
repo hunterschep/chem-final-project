@@ -91,8 +91,6 @@ const Dashboard: React.FC = () => {
       setLoading(true);
       setError(null);
       
-      console.log(`Fetching data for ${selectedLocation.name} at coordinates: ${selectedLocation.latitude}, ${selectedLocation.longitude}`);
-      
       try {
         // Fetch air quality and weather data
         const [airQuality, weather] = await Promise.all([
@@ -118,7 +116,6 @@ const Dashboard: React.FC = () => {
           setCurrentIndex(closestIndex);
         }
       } catch (err) {
-        console.error('Error fetching data:', err);
         setError('Failed to fetch data. Please try again later.');
       } finally {
         setLoading(false);
@@ -171,58 +168,75 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-gray-100 pb-8">
       {/* Header */}
       <header className="bg-blue-600 text-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold">Massachusetts Air Quality Dashboard</h1>
-              <p className="mt-1">Focusing on East Boston | Last updated: {currentTime}</p>
+              <h1 className="text-2xl font-bold">Massachusetts Air Quality Dashboard</h1>
+              <div className="flex items-center text-sm mt-1">
+                <span className="mr-3">Last updated: {currentTime}</span>
+                <span className="px-2 py-0.5 bg-blue-700 rounded text-xs font-medium">
+                  Data: Open-Meteo API
+                </span>
+              </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center">
               <Link 
                 to="/abstract" 
-                className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium"
+                className="bg-blue-700 hover:bg-blue-800 px-3 py-1.5 rounded text-sm font-medium transition"
               >
                 Project Abstract
               </Link>
-              <div className="text-right">
-                <div className="text-sm opacity-80">Data provided by</div>
-                <div className="font-semibold">Open-Meteo Air Quality API</div>
-              </div>
             </div>
           </div>
         </div>
       </header>
       
       <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mb-6">
-          <div className="bg-white rounded-lg shadow-md p-4">
-            <h2 className="text-xl font-semibold mb-2">Selected Location: {selectedLocation.name}</h2>
-            <p className="text-gray-600">
-              Our project focuses on air quality in East Boston, with comparisons to other Massachusetts areas that have 
-              different socioeconomic profiles. This helps highlight potential environmental justice concerns.
-            </p>
+        <div className="flex items-center mb-6 bg-white rounded-lg shadow-sm p-3">
+          <div className="flex-1">
+            <div className="flex items-center">
+              <h2 className="text-xl font-semibold">{selectedLocation.name}</h2>
+              {selectedLocation.type === 'focus' && (
+                <span className="ml-2 px-2 py-0.5 bg-red-100 text-red-800 rounded-full text-xs font-medium">
+                  Focus Area
+                </span>
+              )}
+              {selectedLocation.type === 'industrial' && (
+                <span className="ml-2 px-2 py-0.5 bg-orange-100 text-orange-800 rounded-full text-xs font-medium">
+                  Industrial Area
+                </span>
+              )}
+              {selectedLocation.type === 'wealthy' && (
+                <span className="ml-2 px-2 py-0.5 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+                  Affluent Area
+                </span>
+              )}
+            </div>
             {selectedLocation.description && (
-              <div className="mt-2 p-2 bg-blue-50 rounded-md">
-                <p className="text-sm text-gray-700">{selectedLocation.description}</p>
-              </div>
+              <p className="text-sm text-gray-600 mt-1">{selectedLocation.description}</p>
             )}
           </div>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Left Column - Map */}
-          <div>
-            <MassachusettsMap 
-              locations={maLocations}
-              selectedLocation={selectedLocation}
-              onLocationChange={setSelectedLocation}
-            />
+          <div className="lg:col-span-3">
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+              <MassachusettsMap 
+                locations={maLocations}
+                selectedLocation={selectedLocation}
+                onLocationChange={setSelectedLocation}
+              />
+              <div className="p-3 bg-gray-50 border-t text-xs text-gray-500">
+                Compare air quality across different socioeconomic areas in Massachusetts
+              </div>
+            </div>
           </div>
           
           {/* Right Column - Air Quality and Weather Info */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold mb-4">Current Air Quality</h2>
+          <div className="lg:col-span-2 space-y-6">
+            <div className="bg-white rounded-lg shadow-sm p-5">
+              <h2 className="text-lg font-bold mb-3 pb-2 border-b">Current Air Quality</h2>
               <AQIStatus 
                 aqi={currentAQI} 
                 pm25={currentPM25}
@@ -230,13 +244,13 @@ const Dashboard: React.FC = () => {
               />
             </div>
             
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold mb-4">Health Advisories</h2>
+            <div className="bg-white rounded-lg shadow-sm p-5">
+              <h2 className="text-lg font-bold mb-3 pb-2 border-b">Health Advisories</h2>
               <HealthAdvisories aqi={currentAQI} />
             </div>
             
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold mb-4">Current Weather</h2>
+            <div className="bg-white rounded-lg shadow-sm p-5">
+              <h2 className="text-lg font-bold mb-3 pb-2 border-b">Current Weather</h2>
               <WeatherInfo 
                 weather={weatherData}
                 currentIndex={currentIndex}
@@ -247,37 +261,25 @@ const Dashboard: React.FC = () => {
       </main>
       
       {/* Footer */}
-      <footer className="bg-gray-800 text-white mt-12 py-8">
+      <footer className="bg-gray-800 text-white mt-12 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="md:flex md:justify-between">
-            <div className="mb-6 md:mb-0">
-              <h2 className="text-xl font-semibold">Boston Air Quality Project</h2>
-              <p className="mt-2 text-gray-400">
-                A project for monitoring and understanding air quality in Boston communities.
-              </p>
+          <div className="md:flex md:justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <h2 className="text-lg font-semibold">Boston Air Quality Project</h2>
             </div>
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider">Resources</h3>
-              <ul className="mt-4 space-y-2">
-                <li>
-                  <a href="https://www.airnow.gov/" className="text-gray-400 hover:text-white">
-                    AirNow
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.epa.gov/air-quality-index" className="text-gray-400 hover:text-white">
-                    EPA Air Quality
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.mass.gov/orgs/massachusetts-department-of-environmental-protection" className="text-gray-400 hover:text-white">
-                    MassDEP
-                  </a>
-                </li>
-              </ul>
+            <div className="flex space-x-6">
+              <a href="https://www.airnow.gov/" className="text-gray-300 hover:text-white text-sm">
+                AirNow
+              </a>
+              <a href="https://www.epa.gov/air-quality-index" className="text-gray-300 hover:text-white text-sm">
+                EPA Air Quality
+              </a>
+              <a href="https://www.mass.gov/orgs/massachusetts-department-of-environmental-protection" className="text-gray-300 hover:text-white text-sm">
+                MassDEP
+              </a>
             </div>
           </div>
-          <div className="mt-8 border-t border-gray-700 pt-8 text-center text-gray-400">
+          <div className="mt-4 text-center text-xs text-gray-400">
             <p>© 2023 Boston Air Quality Project. For educational purposes only.</p>
           </div>
         </div>

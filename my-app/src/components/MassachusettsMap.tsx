@@ -51,7 +51,7 @@ const MapCenter: React.FC<{ position: [number, number] }> = ({ position }) => {
       try {
         map.setView(position, 13);
       } catch (error) {
-        console.error("Error setting map view:", error);
+        // Silent fail - map will still work, just might not center correctly
       }
     }
   }, [position, map]);
@@ -100,47 +100,29 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
     return 8;
   };
 
-  // Legend component
-  const MapLegend = () => (
-    <div className="absolute top-5 right-5 bg-white p-4 rounded-lg shadow-lg z-50 border-2 border-gray-300">
-      <h3 className="font-bold text-lg mb-3 text-center border-b pb-2">Location Types</h3>
-      <div className="space-y-3">
-        <div>
-          <div className="flex items-center mb-1">
-            <div className="w-6 h-6 rounded-full bg-[#FF6B6B] mr-2 border-2 border-white shadow-sm"></div>
-            <span className="font-semibold">Focus Area</span>
-          </div>
-          <p className="text-xs text-gray-600 ml-8">Environmental justice focus areas with significant air quality concerns</p>
-        </div>
-        <div>
-          <div className="flex items-center mb-1">
-            <div className="w-6 h-6 rounded-full bg-[#FFA500] mr-2 border-2 border-white shadow-sm"></div>
-            <span className="font-semibold">Industrial Areas</span>
-          </div>
-          <p className="text-xs text-gray-600 ml-8">Cities with industrial activity and diverse populations facing potential air quality issues</p>
-        </div>
-        <div>
-          <div className="flex items-center mb-1">
-            <div className="w-6 h-6 rounded-full bg-[#32CD32] mr-2 border-2 border-white shadow-sm"></div>
-            <span className="font-semibold">Affluent Areas</span>
-          </div>
-          <p className="text-xs text-gray-600 ml-8">Wealthy communities with typically better environmental conditions</p>
-        </div>
-      </div>
-      <div className="mt-3 pt-2 border-t text-xs italic text-gray-500">
-        Yellow border indicates currently selected location
-      </div>
-    </div>
-  );
-
   return (
     <div className="w-full h-[600px] relative">
-      <div className="bg-blue-100 p-3 mb-2 rounded-md text-sm">
-        <p className="mb-1 font-semibold">Environmental Justice and Air Quality Map</p>
-        <p>This map compares air quality across Massachusetts locations with different socioeconomic profiles. 
-        <span className="font-medium"> Look for the color-coded markers:</span> <span className="text-red-500 font-medium">red</span> for our East Boston focus area, 
-        <span className="text-orange-500 font-medium"> orange</span> for industrial areas, and <span className="text-green-600 font-medium">green</span> for affluent communities.
-        See the detailed legend in the top-right corner of the map.</p>
+      {/* Map Legend positioned absolutely over the map */}
+      <div className="absolute top-5 right-5 bg-white p-3 rounded-lg shadow-lg z-[1000] border border-gray-200">
+        <h3 className="font-bold text-sm mb-2 text-center">Location Types</h3>
+        <div className="space-y-2">
+          <div className="flex items-center text-xs">
+            <div className="w-4 h-4 rounded-full bg-[#FF6B6B] mr-2 border border-white shadow-sm"></div>
+            <span>Focus Area</span>
+          </div>
+          <div className="flex items-center text-xs">
+            <div className="w-4 h-4 rounded-full bg-[#FFA500] mr-2 border border-white shadow-sm"></div>
+            <span>Industrial Areas</span>
+          </div>
+          <div className="flex items-center text-xs">
+            <div className="w-4 h-4 rounded-full bg-[#32CD32] mr-2 border border-white shadow-sm"></div>
+            <span>Affluent Areas</span>
+          </div>
+          <div className="flex items-center text-xs italic text-gray-500 mt-1 pt-1 border-t border-gray-200">
+            <div className="w-3 h-3 rounded-full border-2 border-yellow-400 mr-2"></div>
+            <span>Selected location</span>
+          </div>
+        </div>
       </div>
       
       <MapContainer
@@ -180,8 +162,6 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
             </Popup>
           </Marker>
         ))}
-        
-        <MapLegend />
       </MapContainer>
     </div>
   );
