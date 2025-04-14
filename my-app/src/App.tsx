@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Dashboard from './pages/Dashboard';
-import About from './pages/About';
+import Sources from './pages/Sources';
 import VisualAbstract from './pages/VisualAbstract';
 
 function App() {
@@ -25,10 +25,10 @@ function App() {
                     Dashboard
                   </Link>
                   <Link 
-                    to="/about" 
+                    to="/sources" 
                     className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
                   >
-                    About
+                    Sources
                   </Link>
                   <Link 
                     to="/abstract" 
@@ -58,7 +58,7 @@ function App() {
         {/* Routes */}
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/sources" element={<Sources />} />
           <Route path="/abstract" element={<VisualAbstract />} />
         </Routes>
       </div>

@@ -96,6 +96,15 @@ const ChemistryExplainer: React.FC = () => {
               Ozone often peaks downwind of urban centers in the afternoon. 
               Transportation emissions from East Boston contribute to regional ozone formation.
             </p>
+            <div className="mt-3 pt-2 border-t border-gray-200">
+              <h4 className="font-semibold text-blue-800 text-xs">Research Insight:</h4>
+              <p className="text-xs text-gray-700 italic">
+                "In the NOx-sensitive regime (with relatively low NOx and high VOC), O₃ increases with increasing NOx and changes little in response to increasing VOC. In the NOx-saturated or VOC-sensitive regime O₃ decreases with increasing NOx and increases with increasing VOC."
+              </p>
+              <p className="text-xs text-gray-600 mt-1">
+                — Sillman (1999) study on urban ozone chemistry, showing why pollution controls need to target different precursors depending on local conditions
+              </p>
+            </div>
           </div>
           
           <div className="border border-gray-200 rounded-lg p-4">
@@ -150,6 +159,15 @@ const ChemistryExplainer: React.FC = () => {
               <p className="text-xs text-gray-600 mt-2">
                 Fine particles can penetrate deep into lungs and even enter the bloodstream, affecting multiple body systems.
               </p>
+              <div className="mt-3 pt-2 border-t border-gray-200 bg-red-50 p-2 rounded">
+                <h4 className="font-semibold text-red-800 text-xs">Research Finding:</h4>
+                <p className="text-xs text-gray-700">
+                  The Gauderman et al. (2004) study in the New England Journal of Medicine found that children exposed to the highest levels of PM₂.₅ were <span className="font-bold">nearly 5 times more likely</span> to have stunted lung development by age 18 compared to those in cleaner air communities (7.9% vs 1.6%).
+                </p>
+                <p className="text-xs text-gray-600 mt-1 italic">
+                  These findings demonstrate how air pollution can permanently affect children's lung development during critical growth periods.
+                </p>
+              </div>
             </div>
             
             <div className="border border-gray-200 rounded-lg p-4">

@@ -214,6 +214,37 @@ const HistoricalContext: React.FC = () => {
             </div>
           </div>
           
+          <div className="border border-gray-200 rounded-lg p-4 bg-blue-50">
+            <h3 className="text-md font-semibold mb-3 text-blue-800">Research on Environmental Disparities</h3>
+            <div className="space-y-4">
+              <div className="border-l-4 border-blue-400 pl-3">
+                <h4 className="font-semibold text-sm">Nationwide Pattern of Inequality</h4>
+                <p className="text-xs text-gray-700 my-1">
+                  The Jbaily et al. (2022) study in Nature found that:
+                </p>
+                <p className="text-xs text-gray-700 italic">
+                  "Areas with higher-than-average white and Native American populations have been consistently exposed to average PM₂.₅ levels that are lower than areas with higher-than-average Black, Asian and Hispanic or Latino populations. Moreover, areas with low-income populations have been consistently exposed to higher average PM₂.₅ levels than areas with high-income groups."
+                </p>
+                <p className="text-xs text-gray-600 mt-1">
+                  East Boston's demographics and pollution burden fit this nationwide pattern of environmental inequality.
+                </p>
+              </div>
+              
+              <div className="border-l-4 border-blue-400 pl-3">
+                <h4 className="font-semibold text-sm">Transportation-Related Disparities</h4>
+                <p className="text-xs text-gray-700 my-1">
+                  Pratt et al. (2015) demonstrated in their research that:
+                </p>
+                <p className="text-xs text-gray-700 italic">
+                  "Populations on the lower end of the socio-economic spectrum and minorities were disproportionately exposed to traffic and air pollution and at a disproportionately higher risk for adverse health outcomes. Despite driving less, the air pollution impacts were higher from all sources—especially transportation sources—at non-white and low SES households that tended to be closer to the urban core."
+                </p>
+                <p className="text-xs text-gray-600 mt-1">
+                  This reflects East Boston's situation exactly: despite having lower car ownership rates than wealthier neighborhoods, residents suffer higher pollution exposure from surrounding transportation infrastructure.
+                </p>
+              </div>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="border border-gray-200 rounded-lg p-4">
               <h3 className="text-md font-semibold mb-2 text-blue-700">Health Disparities</h3>

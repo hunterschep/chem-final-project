@@ -21,7 +21,7 @@ const VisualAbstract: React.FC = () => {
             
             <div className="mb-6 flex justify-center">
               <img 
-                src="/visual.png" 
+                src={`${process.env.PUBLIC_URL}/visual.png`} 
                 alt="East Boston Air Quality Visualization" 
                 className="rounded-lg shadow-md max-h-96 object-contain"
               />
@@ -75,7 +75,7 @@ const VisualAbstract: React.FC = () => {
         </div>
         
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>© 2023 East Boston Air Quality Project | Final Project for Environmental Chemistry</p>
+          <p>© 2025 East Boston Air Quality Project | Final Project for Chemistry and Society</p>
         </div>
       </div>
     </div>

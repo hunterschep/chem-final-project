@@ -304,7 +304,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
           <div className="mt-4 text-center text-xs text-gray-400">
-            <p>© 2023 Boston Air Quality Project. For educational purposes only.</p>
+            <p>© 2025 Boston Air Quality Project. For educational purposes only.</p>
           </div>
         </div>
       </footer>
