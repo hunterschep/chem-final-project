@@ -75,7 +75,7 @@ const VisualAbstract: React.FC = () => {
         </div>
         
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>© 2025 East Boston Air Quality Project | Final Project for Chemistry and Society</p>
+          <p>© 2025 Hunter Scheppat | Final Project for Chemistry and Society</p>
         </div>
       </div>
     </div>

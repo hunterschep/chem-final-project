@@ -6,7 +6,6 @@ import HealthAdvisories from '../components/HealthAdvisories';
 import MassachusettsMap from '../components/MassachusettsMap';
 import ChemistryExplainer from '../components/ChemistryExplainer';
 import HistoricalContext from '../components/HistoricalContext';
-import { Link } from 'react-router-dom';
 
 // Define content view types
 type ContentView = 'map' | 'chemistry' | 'history';
@@ -295,7 +294,7 @@ const Dashboard: React.FC = () => {
               <a href="https://www.airnow.gov/" className="text-gray-300 hover:text-white text-sm">
                 AirNow
               </a>
-              <a href="https://www.epa.gov/air-quality-index" className="text-gray-300 hover:text-white text-sm">
+              <a href="https://www.epa.gov/air-quality" className="text-gray-300 hover:text-white text-sm">
                 EPA Air Quality
               </a>
               <a href="https://www.mass.gov/orgs/massachusetts-department-of-environmental-protection" className="text-gray-300 hover:text-white text-sm">
@@ -304,7 +303,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
           <div className="mt-4 text-center text-xs text-gray-400">
-            <p>© 2025 Boston Air Quality Project. For educational purposes only.</p>
+            <p>© 2025 Hunter Scheppat | Final Project for Chemistry and Society</p>
           </div>
         </div>
       </footer>

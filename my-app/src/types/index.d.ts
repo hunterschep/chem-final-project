@@ -25,7 +25,7 @@ export interface Location {
   longitude: number;
   timezone: string;
   description?: string;
-  type?: 'focus' | 'industrial' | 'wealthy';
+  type?: 'focus' | 'industrial' | 'wealthy' | 'custom';
 }
 
 export interface AirQualityCategory {

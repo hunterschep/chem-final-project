@@ -1,30 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Location } from '../types';
 
-// Fix for default leaflet marker icons
-const defaultIcon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
-
-// Custom pin icon for user-dropped pins
-const customPinIcon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
 
 // Custom div icons for different location types
 const getLocationIcon = (location: Location, isSelected: boolean): L.DivIcon => {
@@ -39,6 +18,9 @@ const getLocationIcon = (location: Location, isSelected: boolean): L.DivIcon => 
     backgroundColor = '#FFA500'; // Orange for industrial areas
   } else if (location.type === 'wealthy') {
     backgroundColor = '#32CD32'; // Green for wealthy areas
+  } else if (location.type === 'custom') {
+    backgroundColor = '#9370DB'; // Purple for custom user-selected locations
+    size = isSelected ? 28 : 24;
   }
   
   if (isSelected) {
@@ -53,28 +35,11 @@ const getLocationIcon = (location: Location, isSelected: boolean): L.DivIcon => 
   });
 };
 
-// Component to set map view to selected location
-const MapCenter: React.FC<{ position: [number, number] }> = ({ position }) => {
-  const map = useMap();
-  
-  useEffect(() => {
-    if (map) {
-      try {
-        map.setView(position, 13);
-      } catch (error) {
-        // Silent fail - map will still work, just might not center correctly
-      }
-    }
-  }, [position, map]);
-  
-  return null;
-};
-
 // Component to handle map clicks and add custom pins
 const MapClickHandler: React.FC<{
   onMapClick: (lat: number, lng: number) => void
 }> = ({ onMapClick }) => {
-  const map = useMapEvents({
+  useMapEvents({
     click: (e) => {
       onMapClick(e.latlng.lat, e.latlng.lng);
     }
@@ -135,7 +100,7 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
       longitude: lng,
       timezone: 'America/New_York',
       description: 'Custom location selected by user',
-      type: 'focus'
+      type: 'custom'
     };
     
     setCustomPinLocation(newCustomLocation);
@@ -159,6 +124,10 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
           <div className="flex items-center text-xs">
             <div className="w-4 h-4 rounded-full bg-[#32CD32] mr-2 border border-white shadow-sm"></div>
             <span>Affluent Areas</span>
+          </div>
+          <div className="flex items-center text-xs">
+            <div className="w-4 h-4 rounded-full bg-[#9370DB] mr-2 border border-white shadow-sm"></div>
+            <span>Custom Location</span>
           </div>
           <div className="flex items-center text-xs italic text-gray-500 mt-1 pt-1 border-t border-gray-200">
             <div className="w-3 h-3 rounded-full border-2 border-yellow-400 mr-2"></div>
@@ -218,7 +187,7 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
         {customPinLocation && (
           <Marker
             position={[customPinLocation.latitude, customPinLocation.longitude]}
-            icon={defaultIcon}
+            icon={getLocationIcon(customPinLocation, true)}
           >
             <Popup>
               <div className="p-2">
