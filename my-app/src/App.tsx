@@ -4,6 +4,7 @@ import './App.css';
 import Dashboard from './pages/Dashboard';
 import Sources from './pages/Sources';
 import VisualAbstract from './pages/VisualAbstract';
+import Action from './pages/Action';
 
 function App() {
   return (
@@ -35,6 +36,12 @@ function App() {
                     className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
                   >
                     Project Abstract
+                  </Link>
+                  <Link 
+                    to="/action" 
+                    className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                  >
+                    Action
                   </Link>
                 </div>
               </div>
@@ -71,6 +78,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/sources" element={<Sources />} />
           <Route path="/abstract" element={<VisualAbstract />} />
+          <Route path="/action" element={<Action />} />
         </Routes>
       </div>
     </Router>

@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/chem-final-project/static/css/main.817d603d.css",
-    "main.js": "/chem-final-project/static/js/main.5fc82a5f.js",
+    "main.css": "/chem-final-project/static/css/main.68774ff2.css",
+    "main.js": "/chem-final-project/static/js/main.f5544099.js",
     "static/js/453.ed3810f9.chunk.js": "/chem-final-project/static/js/453.ed3810f9.chunk.js",
     "index.html": "/chem-final-project/index.html",
-    "main.817d603d.css.map": "/chem-final-project/static/css/main.817d603d.css.map",
-    "main.5fc82a5f.js.map": "/chem-final-project/static/js/main.5fc82a5f.js.map",
+    "main.68774ff2.css.map": "/chem-final-project/static/css/main.68774ff2.css.map",
+    "main.f5544099.js.map": "/chem-final-project/static/js/main.f5544099.js.map",
     "453.ed3810f9.chunk.js.map": "/chem-final-project/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.817d603d.css",
-    "static/js/main.5fc82a5f.js"
+    "static/css/main.68774ff2.css",
+    "static/js/main.f5544099.js"
   ]
 }

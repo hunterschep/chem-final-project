@@ -72,6 +72,13 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
     });
   }, []);
 
+  // Set customPinLocation when selectedLocation is a custom type
+  useEffect(() => {
+    if (selectedLocation.type === 'custom') {
+      setCustomPinLocation(selectedLocation);
+    }
+  }, [selectedLocation]);
+
   // Get initial map center and zoom based on selected location
   const getInitialCenter = (): [number, number] => {
     // If East Boston is selected, center on it
@@ -187,7 +194,7 @@ const MassachusettsMap: React.FC<MassachusettsMapProps> = ({
         {customPinLocation && (
           <Marker
             position={[customPinLocation.latitude, customPinLocation.longitude]}
-            icon={getLocationIcon(customPinLocation, true)}
+            icon={getLocationIcon(customPinLocation, customPinLocation.name === selectedLocation.name)}
           >
             <Popup>
               <div className="p-2">
