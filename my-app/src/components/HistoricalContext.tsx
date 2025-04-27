@@ -43,9 +43,6 @@ const HistoricalContext: React.FC = () => {
                   <li>The airport has grown to become New England's largest transportation hub</li>
                   <li>Today's operations include ~400,000 flights annually, emitting tens of thousands of pounds of pollutants daily</li>
                 </ul>
-                <p className="mt-2 italic text-xs">
-                  "We've lost our health because the airport has destroyed us." —East Boston resident
-                </p>
               </div>
             </div>
             

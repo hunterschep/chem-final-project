@@ -60,7 +60,7 @@ const VisualAbstract: React.FC = () => {
               </p>
               
               <div className="bg-blue-50 p-4 rounded-lg mt-6">
-                <h3 className="text-xl font-semibold text-blue-700 mb-2">Our Solution</h3>
+                <h3 className="text-xl font-semibold text-blue-700 mb-2">My Solution</h3>
                 <p>
                   In response, this project developed and deployed a live air quality dashboard tailored to
                   East Boston, integrating real-time monitoring data and historical records on PM2.5 and NOx.

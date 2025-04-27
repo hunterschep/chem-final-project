@@ -8,24 +8,22 @@ const Action: React.FC = () => {
     {
       title: "Research & Data Collection",
       icon: "📚",
-      description: "Conducted comprehensive research on East Boston's air quality challenges by consulting peer-reviewed studies, government reports, and local journalism. Created a database of relevant information focused on environmental justice concerns and health impacts.",
+      description: "Conducted research on East Boston's air quality challenges by consulting peer-reviewed studies, government reports, and local journalism.",
       details: [
         "Analyzed EPA air quality reports for East Boston and surrounding areas",
         "Studied medical research on respiratory health impacts in urban environments",
-        "Interviewed community members about their lived experiences",
         "Reviewed local news coverage on environmental activism efforts"
       ],
-      achievement: "Compiled a comprehensive knowledge base that informed the project direction and provided credibility to our claims."
+      achievement: "Compiled a comprehensive knowledge base that informed the project direction and provided credibility to my claims."
     },
     {
       title: "API Integration",
       icon: "🔌",
-      description: "Selected and integrated the OpenMeteo API to provide real-time and historical air quality data for East Boston and comparative Massachusetts locations. This free, reliable data source became the backbone of our interactive dashboard.",
+      description: "Selected and integrated the OpenMeteo API to provide real-time and historical air quality data for East Boston and comparative Massachusetts locations. This free, reliable data source became the backbone of my interactive dashboard.",
       details: [
         "Evaluated multiple air quality APIs for data quality and reliability",
         "Implemented OpenMeteo API for PM2.5, PM10, and other pollutant readings",
         "Created data processing utilities to normalize and visualize the information",
-        "Set up hourly data refreshing to ensure current information"
       ],
       achievement: "Successfully integrated live data streams that update automatically, providing residents with current air quality information."
     },
@@ -34,7 +32,6 @@ const Action: React.FC = () => {
       icon: "📊",
       description: "Synthesized research findings and API data into an intuitive, informative dashboard that presents air quality information alongside health impact data and historical context. Created interactive visualizations that make complex data accessible.",
       details: [
-        "Built a responsive web application using React and Tailwind CSS",
         "Designed interactive maps showing pollution hotspots in East Boston",
         "Created dynamic charts that visualize air quality trends over time",
         "Added explanatory content about pollution chemistry and health impacts"
@@ -44,12 +41,10 @@ const Action: React.FC = () => {
     {
       title: "Public Deployment & Outreach",
       icon: "🌐",
-      description: "Launched the dashboard publicly online and conducted outreach to local environmental justice organizations, community health centers, and schools. Provided documentation for continued use and maintenance.",
+      description: "Launched the dashboard publicly online and conducted outreach to local environmental justice organizations, community health centers, and schools (Still waiting for responses!).",
       details: [
         "Deployed the application to GitHub Pages for free public access",
         "Created informational materials for local distribution",
-        "Contacted organizations including Air Inc., GreenRoots, and East Boston Neighborhood Health Center",
-        "Presented the tool at a local community meeting"
       ],
       achievement: "Expanded awareness of air quality issues and provided a concrete tool for advocacy and personal health protection."
     }
@@ -70,7 +65,7 @@ const Action: React.FC = () => {
         
         <div className="bg-white rounded-lg shadow-md overflow-hidden mb-10">
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">From Research to Reality: Our Process</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">From Research to Reality: My Process</h2>
             
             {/* Timeline navigation */}
             <div className="flex overflow-x-auto pb-4 mb-6 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100">

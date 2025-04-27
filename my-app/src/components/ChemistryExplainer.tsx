@@ -287,7 +287,7 @@ const ChemistryExplainer: React.FC = () => {
       )}
       
       <div className="mt-4 pt-3 border-t border-gray-200 text-xs text-gray-500">
-        <p>Data sources: MA Dept. of Public Health, Logan Airport Health Study, Air Partners, EPA EJSCREEN, Union of Concerned Scientists</p>
+        <p>Data sources: MA Dept. of Public Health, Logan Airport Health Study, Air Partners, Union of Concerned Scientists, Sillman (1999), Gauderman et al. (2004)</p>
       </div>
     </div>
   );

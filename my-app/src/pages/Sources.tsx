@@ -95,6 +95,11 @@ const Sources: React.FC = () => {
                 </li>
                 <li className="pl-4 border-l-4 border-green-200 py-1">
                   <p className="text-gray-800">
+                    Lynds, John. "Historic Newsreel Depicting the Maverick Mothers Protests of the 1960s Digitally Remastered." East Boston Times-Free Press. Accessed April 27, 2025. <a href="https://eastietimes.com/2021/04/14/historic-newsreel-depicting-the-maverick-mothers-protests-of-the-1960s-digitally-remastered/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://eastietimes.com/2021/04/14/historic-newsreel-depicting-the-maverick-mothers-protests-of-the-1960s-digitally-remastered/</a>.
+                  </p>
+                </li>
+                <li className="pl-4 border-l-4 border-green-200 py-1">
+                  <p className="text-gray-800">
                     Ojikutu, Bisola, Boston Public Health Commission, Helen Ayanian, Jaylen Clarke, Dan Dooley, Kathryn Hall, Ally Huh, et al. 2023. "HEALTH OF BOSTON 2023 ASTHMA REPORT." Boston Public Health Commission. <a href="https://www.boston.gov/sites/default/files/file/2023/05/HOB_Asthma_2023_FINAL_May11.pdf" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://www.boston.gov/sites/default/files/file/2023/05/HOB_Asthma_2023_FINAL_May11.pdf</a>.
                   </p>
                 </li>
