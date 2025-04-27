@@ -2,6 +2,8 @@
 
 This project provides a dashboard for tracking air quality in Boston communities, with a focus on environmental justice concerns in East Boston.
 
+**Project [Link](https://hunterschep.github.io/chem-final-project/)
+
 ## Deployment
 
 This project is configured to deploy to GitHub Pages. Follow these instructions to deploy successfully:
