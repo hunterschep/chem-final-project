@@ -156,6 +156,18 @@ const Appendix: React.FC = () => {
           </ul>
         </div>
       </div>
+
+      {/* Feedback and Changes Section */}
+      <div className="mt-12 bg-blue-50 p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-blue-700 mb-4">Project Evolution & Feedback</h2>
+        <p className="mb-3">Based on feedback received during the project development:</p>
+        <ul className="list-disc pl-5 space-y-2 mb-4">
+          <li>I narrowed the scope to focus specifically on East Boston's air quality challenges and initiatives.</li>
+          <li>I incorporated more historical context about air quality activism in the area, following suggestions from peers.</li>
+          <li>The activity triangle above reflects this more focused approach to the environmental justice issue.</li>
+        </ul>
+        <p className="text-sm text-gray-600 italic">I've implemented these changes to the best of my ability. For additional feedback or questions, contact me at scheppat@bc.edu</p>
+      </div>
     </div>
   );
 };
