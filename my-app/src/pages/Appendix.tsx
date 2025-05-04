@@ -11,9 +11,9 @@ const Appendix: React.FC = () => {
         </p>
       </div>
 
-      <div className="bg-white p-8 rounded-lg shadow-lg mb-12">
+      <div className="bg-white p-4 sm:p-8 rounded-lg shadow-lg mb-12">
         {/* Activity Triangle Visualization */}
-        <div className="relative" style={{ height: '700px' }}>
+        <div className="relative" style={{ height: '350px', minHeight: '350px', maxHeight: '700px' }}>
           {/* Triangle Base */}
           <svg 
             className="w-full h-full"
@@ -32,32 +32,45 @@ const Appendix: React.FC = () => {
             <line x1="325" y1="325" x2="150" y2="600" stroke="#2563EB" strokeWidth="3" strokeDasharray="5,5" />
             <line x1="675" y1="325" x2="850" y2="600" stroke="#2563EB" strokeWidth="3" strokeDasharray="5,5" />
             
-            {/* Node Labels */}
-            <circle cx="500" cy="50" r="40" fill="#3B82F6" />
-            <circle cx="150" cy="600" r="40" fill="#3B82F6" />
-            <circle cx="850" cy="600" r="40" fill="#3B82F6" />
-            <circle cx="325" cy="325" r="40" fill="#3B82F6" />
-            <circle cx="675" cy="325" r="40" fill="#3B82F6" />
-            <circle cx="500" cy="600" r="40" fill="#3B82F6" />
+            {/* Node Labels - Adjusted for better mobile visibility */}
+            <circle cx="500" cy="50" r="35" fill="#3B82F6" />
+            <circle cx="150" cy="600" r="35" fill="#3B82F6" />
+            <circle cx="850" cy="600" r="35" fill="#3B82F6" />
+            <circle cx="325" cy="325" r="35" fill="#3B82F6" />
+            <circle cx="675" cy="325" r="35" fill="#3B82F6" />
+            <circle cx="500" cy="600" r="35" fill="#3B82F6" />
             
-            {/* Node Text */}
-            <text x="500" y="50" textAnchor="middle" dy="5" fill="white" fontWeight="bold">Object</text>
-            <text x="150" y="600" textAnchor="middle" dy="5" fill="white" fontWeight="bold">Subject</text>
-            <text x="850" y="600" textAnchor="middle" dy="5" fill="white" fontWeight="bold">Tools</text>
-            <text x="325" y="325" textAnchor="middle" dy="5" fill="white" fontWeight="bold">Rules</text>
-            <text x="675" y="325" textAnchor="middle" dy="5" fill="white" fontWeight="bold">Community</text>
-            <text x="500" y="600" textAnchor="middle" dy="5" fill="white" fontWeight="bold">Division</text>
-            <text x="500" y="620" textAnchor="middle" dy="5" fill="white" fontWeight="bold">of Labor</text>
+            {/* Node Text - Reduced font size for mobile */}
+            <text x="500" y="50" textAnchor="middle" dy="5" fill="white" fontWeight="bold" fontSize="14">Object</text>
+            <text x="150" y="600" textAnchor="middle" dy="5" fill="white" fontWeight="bold" fontSize="14">Subject</text>
+            <text x="850" y="600" textAnchor="middle" dy="5" fill="white" fontWeight="bold" fontSize="14">Tools</text>
+            <text x="325" y="325" textAnchor="middle" dy="5" fill="white" fontWeight="bold" fontSize="14">Rules</text>
+            <text x="675" y="325" textAnchor="middle" dy="5" fill="white" fontWeight="bold" fontSize="14">Community</text>
+            <text x="500" y="600" textAnchor="middle" dy="5" fill="white" fontWeight="bold" fontSize="14">Division</text>
+            <text x="500" y="620" textAnchor="middle" dy="5" fill="white" fontWeight="bold" fontSize="14">of Labor</text>
           </svg>
         </div>
       </div>
 
+      {/* Legend for mobile users to better understand the diagram */}
+      <div className="block md:hidden bg-white p-4 rounded-lg shadow mb-6">
+        <h3 className="font-bold text-blue-600 mb-2">Activity Triangle Components:</h3>
+        <ul className="text-sm space-y-1">
+          <li><span className="font-semibold">Object:</span> The shared goal or problem</li>
+          <li><span className="font-semibold">Subject:</span> People affected or involved</li>
+          <li><span className="font-semibold">Tools:</span> Instruments used to address the object</li>
+          <li><span className="font-semibold">Rules:</span> Regulations and norms</li>
+          <li><span className="font-semibold">Community:</span> Social environment</li>
+          <li><span className="font-semibold">Division of Labor:</span> How tasks and resources are allocated</li>
+        </ul>
+      </div>
+
       {/* Detailed Information Sections */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold text-blue-600 mb-4">Subjects</h2>
-          <p className="text-gray-700 mb-3">Persons or groups directly affected by, caring for, or working on the issue.</p>
-          <ul className="list-disc pl-5 space-y-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-12">
+        <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-blue-600 mb-3 sm:mb-4">Subjects</h2>
+          <p className="text-gray-700 mb-2 sm:mb-3 text-sm sm:text-base">Persons or groups directly affected by, caring for, or working on the issue.</p>
+          <ul className="list-disc pl-5 space-y-1 sm:space-y-2 text-sm sm:text-base">
             <li>East Boston residents (majority Latino, many low-income & immigrant/undocumented)</li>
             <li>Children & seniors with high asthma/COPD prevalence</li>
             <li>Airport, port-facility, rideshare & delivery workers regularly exposed to emissions</li>
@@ -68,10 +81,10 @@ const Appendix: React.FC = () => {
           </ul>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold text-blue-600 mb-4">Tools</h2>
-          <p className="text-gray-700 mb-3">Tangible or symbolic instruments used to act on the object.</p>
-          <ul className="list-disc pl-5 space-y-2">
+        <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-blue-600 mb-3 sm:mb-4">Tools</h2>
+          <p className="text-gray-700 mb-2 sm:mb-3 text-sm sm:text-base">Tangible or symbolic instruments used to act on the object.</p>
+          <ul className="list-disc pl-5 space-y-1 sm:space-y-2 text-sm sm:text-base">
             <li>Monitoring tech: PurpleAir sensors, MCAC ultrafine-particle station, Air Partners "Modulair," City "Clean Air Boston" network, EPA EJSCREEN</li>
             <li>Health mitigation: HEPA air-purifier grants for day-cares, asthma action plans, rescue inhalers, N95/KN95 masks</li>
             <li>Policy & legal tools: MA EJ Act (2021), anti-idling law (&gt;5 min), Mass. House Bill H.997 (airport monitoring), Clean Air Act permits, lawsuits & administrative complaints</li>
@@ -80,10 +93,10 @@ const Appendix: React.FC = () => {
           </ul>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold text-blue-600 mb-4">Object</h2>
-          <p className="text-gray-700 mb-3">The shared problem or goal that motivates collective activity.</p>
-          <ul className="list-disc pl-5 space-y-2">
+        <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-blue-600 mb-3 sm:mb-4">Object</h2>
+          <p className="text-gray-700 mb-2 sm:mb-3 text-sm sm:text-base">The shared problem or goal that motivates collective activity.</p>
+          <ul className="list-disc pl-5 space-y-1 sm:space-y-2 text-sm sm:text-base">
             <li>Reduce PM₂.₅ & NOₓ exposure peaks in East Boston</li>
             <li>Improve respiratory & cardiovascular health outcomes</li>
             <li>Rectify historic environmental-justice inequities tied to Logan Airport, highways, and Chelsea Creek industry</li>
@@ -91,11 +104,11 @@ const Appendix: React.FC = () => {
           </ul>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold text-blue-600 mb-4">Rules</h2>
-          <p className="text-gray-700 mb-3">Explicit regulations and implicit norms that shape or constrain action.</p>
-          <h3 className="font-semibold mt-2">Explicit:</h3>
-          <ul className="list-disc pl-5 space-y-1">
+        <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-blue-600 mb-3 sm:mb-4">Rules</h2>
+          <p className="text-gray-700 mb-2 sm:mb-3 text-sm sm:text-base">Explicit regulations and implicit norms that shape or constrain action.</p>
+          <h3 className="font-semibold mt-2 text-sm sm:text-base">Explicit:</h3>
+          <ul className="list-disc pl-5 space-y-1 text-sm sm:text-base">
             <li>Clean Air Act standards</li>
             <li>MA anti-idling statute</li>
             <li>MassDEP air-permit requirements</li>
@@ -104,8 +117,8 @@ const Appendix: React.FC = () => {
             <li>Sulfur limits on marine fuel</li>
             <li>Zoning & energy-siting board decisions (e.g., Eversource substation)</li>
           </ul>
-          <h3 className="font-semibold mt-4">Implicit:</h3>
-          <ul className="list-disc pl-5 space-y-1">
+          <h3 className="font-semibold mt-3 sm:mt-4 text-sm sm:text-base">Implicit:</h3>
+          <ul className="list-disc pl-5 space-y-1 text-sm sm:text-base">
             <li>Environmental racism & "sacrifice-zone" planning history</li>
             <li>Language barriers</li>
             <li>Stigma of complaining about airport jobs</li>
@@ -115,11 +128,11 @@ const Appendix: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold text-blue-600 mb-4">Community</h2>
-          <p className="text-gray-700 mb-3">The social milieu in which the activity occurs and whose members share or contest the object.</p>
-          <ul className="list-disc pl-5 space-y-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+        <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-blue-600 mb-3 sm:mb-4">Community</h2>
+          <p className="text-gray-700 mb-2 sm:mb-3 text-sm sm:text-base">The social milieu in which the activity occurs and whose members share or contest the object.</p>
+          <ul className="list-disc pl-5 space-y-1 sm:space-y-2 text-sm sm:text-base">
             <li>East Boston neighborhood (dense, waterfront, least tree canopy in Boston)</li>
             <li>Adjacent EJ communities (Chelsea, Revere, Winthrop) in Logan flight paths</li>
             <li>Boston-area travelers & businesses benefiting from airport/port</li>
@@ -128,10 +141,10 @@ const Appendix: React.FC = () => {
           </ul>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-bold text-blue-600 mb-4">Division of Labor</h2>
-          <p className="text-gray-700 mb-3">How tasks, power, and resources are allocated among actors in pursuit of the object.</p>
-          <ul className="list-disc pl-5 space-y-2">
+        <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+          <h2 className="text-xl font-bold text-blue-600 mb-3 sm:mb-4">Division of Labor</h2>
+          <p className="text-gray-700 mb-2 sm:mb-3 text-sm sm:text-base">How tasks, power, and resources are allocated among actors in pursuit of the object.</p>
+          <ul className="list-disc pl-5 space-y-1 sm:space-y-2 text-sm sm:text-base">
             <li><strong>Regulators (MassDEP, EPA, Boston APC Commission):</strong> set & enforce air-quality standards, issue permits, manage EJ rule-making.</li>
             <li><strong>Massport & Industry:</strong> operate airport/port, implement mitigation (electric GSE, shore power, filtration funds), publish emissions data.</li>
             <li><strong>Community Orgs (GreenRoots, Mothers Out Front, AIR Inc.):</strong> collect data, educate residents, lobby officials, mount legal challenges.</li>
