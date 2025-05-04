@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Sources from './pages/Sources';
 import VisualAbstract from './pages/VisualAbstract';
 import Action from './pages/Action';
+import Appendix from './pages/Appendix';
 
 function App() {
   return (
@@ -41,7 +42,13 @@ function App() {
                     to="/action" 
                     className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
                   >
-                    Action
+                    Action + Why
+                  </Link>
+                  <Link 
+                    to="/appendix" 
+                    className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                  >
+                    Appendix
                   </Link>
                 </div>
               </div>
@@ -79,6 +86,7 @@ function App() {
           <Route path="/sources" element={<Sources />} />
           <Route path="/abstract" element={<VisualAbstract />} />
           <Route path="/action" element={<Action />} />
+          <Route path="/appendix" element={<Appendix />} />
         </Routes>
       </div>
     </Router>

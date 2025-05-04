@@ -52,6 +52,11 @@ const Sources: React.FC = () => {
                     Pope III, C. Arden, et al. "Lung cancer, cardiopulmonary mortality, and long-term exposure to fine particulate air pollution." <em>JAMA</em> 287.9 (2002): 1132-1141.
                   </p>
                 </li>
+                <li className="pl-4 border-l-4 border-blue-200 py-1">
+                  <p className="text-gray-800">
+                    Relvas, Hélder, et al. "Empowering communities: Advancements in air quality monitoring and citizen engagement." <em>Urban Climate</em> 60 (2025): 102344.
+                  </p>
+                </li>
               </ul>
             </div>
             
